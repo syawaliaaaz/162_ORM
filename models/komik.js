@@ -1,16 +1,13 @@
-const { time } = require("console");
-
 module.exports = (sequelize, DataTypes) => {
   const Komik = sequelize.define('Komik', {
-    
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true, 
-      autoIncrement: true, 
+      primaryKey: true,
+      autoIncrement: true,
     },
     judul: {
       type: DataTypes.STRING,
-      unique: false
+      allowNull: false
     },
     deskripsi: {
       type: DataTypes.TEXT,
@@ -19,11 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     penulis: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-}, {
+    }
+  }, {
     tableName: 'Komik',
-    timestamps: false,
-    freezeTableName: true   
+    timestamps: true,       // ✅ aktifkan createdAt & updatedAt
+    freezeTableName: true   // biar nama tabel tetap "Komik", tidak dijamak jadi "Komiks"
   });
+
   return Komik;
 };
